@@ -1,0 +1,1577 @@
+<!doctype html>
+<html lang="en" data-t="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>NayayavVidhi</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+      :root {
+        --bg: #f3f5f9;
+        --cd: #fff;
+        --tx: #14213d;
+        --mu: #5b6b82;
+        --bd: #e0e5ee;
+        --pr: #1e3a8a;
+        --ac: #0d9488;
+        --sd: #0f1f4d;
+      }
+      [data-t="dark"] {
+        --bg: #0b1220;
+        --cd: #131c2e;
+        --tx: #e6edf7;
+        --mu: #93a3ba;
+        --bd: #233049;
+        --pr: #4f8df7;
+        --sd: #08101f;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font:
+          14px/1.5 system-ui,
+          Segoe UI,
+          sans-serif;
+        background: var(--bg);
+        color: var(--tx);
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+        color: inherit;
+      }
+      a {
+        color: var(--pr);
+      }
+      .btn {
+        background: var(--pr);
+        color: #fff;
+        border: 0;
+        border-radius: 6px;
+        padding: 7px 12px;
+        cursor: pointer;
+      }
+      .btn.s {
+        background: transparent;
+        color: var(--tx);
+        border: 1px solid var(--bd);
+      }
+      .btn.d {
+        background: #dc2626;
+      }
+      .btn.g {
+        background: #16a34a;
+      }
+      .btn.x {
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+      :focus-visible {
+        outline: 2px solid var(--ac);
+        outline-offset: 2px;
+      }
+      input,
+      select,
+      textarea {
+        background: var(--cd);
+        border: 1px solid var(--bd);
+        border-radius: 6px;
+        padding: 7px 9px;
+        width: 100%;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        font-size: 12px;
+        margin: 8px 0 3px;
+      }
+      #app {
+        display: flex;
+        min-height: 100vh;
+      }
+      #sb {
+        width: 230px;
+        background: var(--sd);
+        color: #cfd9ee;
+        padding: 14px 8px;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: auto;
+        flex: none;
+      }
+      #sb h1 {
+        font-size: 18px;
+        color: #fff;
+        margin: 0 8px;
+      }
+      #sb small {
+        display: block;
+        margin: 0 8px 14px;
+        font-size: 11px;
+        color: #8fa3c8;
+      }
+      #sb a {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        padding: 8px 10px;
+        border-radius: 6px;
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      #sb a i {
+        width: 16px;
+      }
+      #sb a.on,
+      #sb a:hover {
+        background: #1b3a7a;
+        color: #fff;
+      }
+      #mn {
+        flex: 1;
+        min-width: 0;
+      }
+      header {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        padding: 10px 20px;
+        background: var(--cd);
+        border-bottom: 1px solid var(--bd);
+        position: sticky;
+        top: 0;
+        z-index: 5;
+      }
+      header input {
+        max-width: 340px;
+      }
+      .sp {
+        flex: 1;
+      }
+      #main {
+        padding: 20px;
+        max-width: 1300px;
+      }
+      .ban {
+        background: #fef3c7;
+        color: #78350f;
+        font-size: 12px;
+        padding: 5px 20px;
+      }
+      .cd {
+        background: var(--cd);
+        border: 1px solid var(--bd);
+        border-radius: 8px;
+        padding: 14px;
+        margin-bottom: 14px;
+      }
+      .cd h3 {
+        margin: 0 0 10px;
+        font-size: 15px;
+      }
+      .gr {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      }
+      .g2 {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      }
+      .kp b {
+        font-size: 24px;
+        display: block;
+      }
+      .kp span {
+        color: var(--mu);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid var(--bd);
+        white-space: nowrap;
+      }
+      th {
+        color: var(--mu);
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .tw {
+        overflow-x: auto;
+      }
+      .bd {
+        color: var(--c);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .tb {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+        align-items: center;
+      }
+      .tb > * {
+        width: auto;
+      }
+      #mo {
+        position: fixed;
+        inset: 0;
+        background: #0009;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 20;
+        padding: 12px;
+      }
+      #mo.on {
+        display: flex;
+      }
+      .md {
+        background: var(--cd);
+        border-radius: 10px;
+        padding: 18px;
+        width: min(680px, 100%);
+        max-height: 92vh;
+        overflow: auto;
+        position: relative;
+      }
+      #ts {
+        position: fixed;
+        right: 14px;
+        bottom: 14px;
+        z-index: 30;
+        display: grid;
+        gap: 6px;
+      }
+      .t {
+        background: #0f1f4d;
+        color: #fff;
+        padding: 9px 14px;
+        border-radius: 6px;
+        border-left: 4px solid #0d9488;
+      }
+      .t.e {
+        border-color: #dc2626;
+      }
+      .wm {
+        position: relative;
+        border: 1px dashed var(--bd);
+        padding: 18px;
+        min-height: 150px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      .wm:after {
+        content: attr(data-w);
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotate(-24deg);
+        font-size: 26px;
+        font-weight: 700;
+        opacity: 0.09;
+        text-align: center;
+        pointer-events: none;
+      }
+      .tl {
+        border-left: 2px solid var(--ac);
+        margin-left: 6px;
+        padding-left: 14px;
+      }
+      .tl div {
+        margin-bottom: 10px;
+        position: relative;
+      }
+      .tl div:before {
+        content: "";
+        position: absolute;
+        left: -21px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--ac);
+      }
+      .tl small {
+        color: var(--mu);
+        display: block;
+      }
+      .stp {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+        margin: 8px 0;
+      }
+      .stp span {
+        padding: 3px 9px;
+        border-radius: 12px;
+        background: var(--bg);
+        font-size: 12px;
+      }
+      .stp .on {
+        background: var(--ac);
+        color: #fff;
+      }
+      .tg {
+        width: 38px;
+        height: 20px;
+        background: var(--bd);
+        border-radius: 20px;
+        position: relative;
+        cursor: pointer;
+        border: 0;
+        padding: 0;
+        flex: none;
+      }
+      .tg:after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #fff;
+        transition: 0.15s;
+      }
+      .tg.on {
+        background: var(--ac);
+      }
+      .tg.on:after {
+        left: 20px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--bd);
+      }
+      .dz {
+        border: 2px dashed var(--bd);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        color: var(--mu);
+        cursor: pointer;
+      }
+      .dz.o {
+        border-color: var(--ac);
+      }
+      .em {
+        text-align: center;
+        color: var(--mu);
+        padding: 30px;
+      }
+      .un {
+        background: #dbeafe;
+        border-left: 3px solid var(--pr);
+      }
+      .ul {
+        cursor: pointer;
+      }
+      #lg {
+        min-height: 100vh;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(160deg, #0f1f4d, #12406b);
+      }
+      #lg .cd {
+        width: min(400px, 92vw);
+      }
+      #mb {
+        display: none;
+      }
+      @media (max-width: 820px) {
+        #sb {
+          position: fixed;
+          left: -240px;
+          z-index: 15;
+          transition: 0.2s;
+        }
+        #sb.on {
+          left: 0;
+        }
+        #mb {
+          display: inline-block;
+        }
+        #main {
+          padding: 12px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="lg">
+      <div class="cd">
+        <h2 style="margin: 0">
+          <i class="fa-solid fa-scale-balanced"></i> NyayaVidhi
+        </h2>
+        <p style="color: var(--mu)">
+          Secure Legal &amp; Investigation Document Management System
+        </p>
+        <label for="lr">Role</label
+        ><select id="lr" onchange="lem.value = E[this.value]">
+          <option value="Admin">Admin</option>
+          <option value="Officer" selected>Investigating Officer</option>
+          <option value="Legal">Legal Officer</option>
+          <option value="Auditor">Auditor</option>
+        </select>
+        <label for="lem">Email</label
+        ><input id="lem" value="officer@demo.com" /><label for="lpw"
+          >Password</label
+        ><input id="lpw" type="password" placeholder="Any password" />
+        <p>
+          <button class="btn" style="width: 100%" onclick="login()">
+            Sign in
+          </button>
+        </p>
+        <div class="ban" style="border-radius: 6px">
+          Demo environment — data is stored locally and does not represent a
+          production-secure system.
+        </div>
+      </div>
+    </div>
+    <div id="app" style="display: none">
+      <nav id="sb"></nav>
+      <div id="mn">
+        <div class="ban">
+          Demo environment — data is stored locally and does not represent a
+          production-secure system.
+        </div>
+        <header>
+          <button
+            class="btn s"
+            id="mb"
+            onclick="sb.classList.toggle('on')"
+            aria-label="Menu"
+          >
+            <i class="fa-solid fa-bars"></i></button
+          ><input
+            id="gs"
+            placeholder="Search documents, cases, evidence, users"
+            aria-label="Global search"
+            oninput="go('search')"
+          /><span class="sp"></span>
+          <button class="btn s" onclick="demo()">
+            <i class="fa-solid fa-play"></i> Quick Demo</button
+          ><select
+            id="rs"
+            style="width: 140px"
+            onchange="switchRole(this.value)"
+            aria-label="Switch role"
+          >
+            <option value="Admin">Admin</option>
+            <option value="Officer">Officer</option>
+            <option value="Legal">Legal</option>
+            <option value="Auditor">Auditor</option>
+          </select>
+          <button
+            class="btn s"
+            onclick="go('notifs')"
+            aria-label="Notifications"
+          >
+            <i class="fa-solid fa-bell"></i> <span id="nc"></span></button
+          ><button class="btn s" onclick="theme()" aria-label="Theme">
+            <i class="fa-solid fa-circle-half-stroke"></i></button
+          ><button class="btn s" onclick="logout()" aria-label="Logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </header>
+        <main id="main"></main>
+      </div>
+    </div>
+    <div id="mo"></div>
+    <div id="ts"></div>
+    <script>
+      const E = {
+          Admin: "admin@demo.com",
+          Officer: "officer@demo.com",
+          Legal: "legal@demo.com",
+          Auditor: "auditor@demo.com",
+        },
+        RN = {
+          Admin: "Admin",
+          Officer: "Investigating Officer",
+          Legal: "Legal Officer",
+          Auditor: "Auditor",
+        };
+      const P = {
+        Admin: [
+          "view",
+          "upload",
+          "edit",
+          "download",
+          "share",
+          "delete",
+          "audit",
+          "approve",
+          "manage",
+        ],
+        Officer: ["view", "upload", "edit", "download", "share"],
+        Legal: ["view", "edit", "download", "approve"],
+        Auditor: ["view", "audit"],
+      };
+      const CL = {
+          Public: "#16a34a",
+          Internal: "#2563eb",
+          Confidential: "#d97706",
+          Restricted: "#dc2626",
+        },
+        ST = {
+          Draft: "#64748b",
+          Submitted: "#2563eb",
+          "Under Review": "#d97706",
+          Approved: "#16a34a",
+          Rejected: "#dc2626",
+          Archived: "#475569",
+        };
+      const WF = ["Draft", "Under Review", "Approved", "Archived"],
+        TY = [
+          "FIR",
+          "Charge Sheet",
+          "Forensic Report",
+          "Witness Statement",
+          "Court Order",
+          "Seizure Memo",
+        ];
+      const $ = (q) => document.querySelector(q),
+        now = () => new Date().toISOString().slice(0, 16).replace("T", " "),
+        bd = (t) =>
+          `<span class="bd" style="--c:${CL[t] || ST[t] || "#64748b"}">${t}</span>`,
+        can = (p) => P[S.role].includes(p);
+      let S,
+        V = "dash",
+        arg,
+        T = { q: "", ty: "", st: "", k: "upd", d: -1, p: 0 },
+        CH = [],
+        AU = { u: "", a: "", c: "" };
+      function seed() {
+        const U = [
+          ["Rajesh Verma", "admin@demo.com", "Admin"],
+          ["Insp. Anita Sharma", "officer@demo.com", "Officer"],
+          ["Adv. Priya Nair", "legal@demo.com", "Legal"],
+          ["Kavita Rao", "auditor@demo.com", "Auditor"],
+          ["SI Vikram Singh", "vikram@demo.com", "Officer"],
+          ["DySP Manoj Tiwari", "manoj@demo.com", "Officer"],
+          ["Adv. Sanjay Mishra", "sanjay@demo.com", "Legal"],
+          ["Neha Gupta", "neha@demo.com", "Officer"],
+          ["Arjun Yadav", "arjun@demo.com", "Officer"],
+          ["Farhan Ali", "farhan@demo.com", "Legal"],
+        ].map((u, i) => ({
+          id: "U" + (i + 1),
+          name: u[0],
+          email: u[1],
+          role: u[2],
+          status: i == 8 ? "Suspended" : "Active",
+          last: "2026-09-2" + (i % 9) + " 10:" + (10 + i),
+        }));
+        const C = [
+          ["FIR 214/2026 – Cyber Fraud, Lucknow", "High"],
+          ["FIR 087/2026 – Land Fraud, Kanpur", "Medium"],
+          ["NDPS Case 12/2026 – Narcotics Seizure", "High"],
+          ["PMLA Probe – Shell Companies", "Critical"],
+          ["FIR 331/2026 – Dowry Death, Agra", "High"],
+          ["Corruption Case – PWD Tender", "Medium"],
+          ["FIR 402/2026 – Vehicle Theft Ring", "Low"],
+          ["UAPA Case 03/2026 – Cross-border", "Critical"],
+        ].map((c, i) => ({
+          id: "CASE-26-10" + (i + 1),
+          title: c[0],
+          pri: c[1],
+          off: U[[1, 4, 5, 7, 8, 1, 4, 5][i]].name,
+          status: [
+            "Active",
+            "Active",
+            "Under Investigation",
+            "Active",
+            "Chargesheet Filed",
+            "Active",
+            "Closed",
+            "Under Investigation",
+          ][i],
+          upd: "2026-09-2" + i,
+          notes: ["Bank statements requested under Sec. 91 CrPC."],
+          tl: [
+            {
+              t: "2026-08-1" + i + " 09:30",
+              x: "Case registered at police station",
+            },
+            {
+              t: "2026-09-0" + (i + 1) + " 14:00",
+              x: "Investigation officer assigned",
+            },
+          ],
+        }));
+        const D = [
+          ["FIR Copy 214/2026", 0, 0, "Internal", "Approved"],
+          ["Bank Statement Analysis", 0, 2, "Confidential", "Under Review"],
+          ["Land Registry Extract", 1, 2, "Internal", "Approved"],
+          [
+            "Seizure Memo – 4.2 kg contraband",
+            2,
+            5,
+            "Restricted",
+            "Under Review",
+          ],
+          ["FSL Report – Contraband Sample", 2, 2, "Restricted", "Draft"],
+          ["ED Attachment Order", 3, 3, "Restricted", "Approved"],
+          ["Witness Statement u/s 161 CrPC", 4, 3, "Confidential", "Submitted"],
+          ["Post-mortem Report", 4, 2, "Restricted", "Approved"],
+          ["Tender Bid Documents", 5, 1, "Internal", "Under Review"],
+          ["Charge Sheet Draft – PWD", 5, 1, "Confidential", "Draft"],
+          ["CCTV Forensic Report", 6, 2, "Confidential", "Rejected"],
+          ["Bail Order – Sessions Court", 6, 4, "Public", "Archived"],
+          ["Call Detail Records Summary", 7, 2, "Restricted", "Under Review"],
+          ["Search Warrant u/s 93 CrPC", 7, 4, "Confidential", "Approved"],
+          ["Arrest Memo – Accused A1", 1, 5, "Internal", "Approved"],
+        ].map((d, i) => ({
+          id: "DOC-" + (1001 + i),
+          name: d[0],
+          case: C[d[1]].id,
+          type: TY[d[2]],
+          cls: d[3],
+          owner: U[[1, 4, 5, 7, 8][i % 5]].name,
+          status: d[4],
+          upd: "2026-09-" + String(10 + i).padStart(2, "0"),
+          size: +(0.4 + i * 0.37).toFixed(1),
+          tags: "evidence," + TY[d[2]].toLowerCase(),
+          desc: "Official record for " + C[d[1]].title + ".",
+          ver: [
+            {
+              v: 1,
+              by: U[1].name,
+              date: "2026-08-2" + (i % 9),
+              ch: "Initial upload",
+            },
+            {
+              v: 2,
+              by: U[4].name,
+              date: "2026-09-0" + (1 + (i % 9)),
+              ch: "Corrected annexure references",
+            },
+            {
+              v: 3,
+              by: U[2].name,
+              date: "2026-09-" + String(10 + i).padStart(2, "0"),
+              ch: "Legal vetting edits",
+            },
+          ],
+        }));
+        const V2 = ["Digital", "Biological", "Physical", "Document"],
+          EV = [
+            ["Laptop (Dell, seized)", 0],
+            ["Mobile handset IMEI ***4421", 0],
+            ["Blood sample vial", 4],
+            ["Cash bundle ₹6.5 lakh", 2],
+            ["CCTV DVR unit", 6],
+            ["Forged sale deed", 1],
+            ["Contraband packets", 2],
+            ["Bank ledger printouts", 3],
+          ].map((e, i) => ({
+            id: "EVD-" + (501 + i),
+            type: V2[i % 4],
+            desc: e[0],
+            case: C[e[1]].id,
+            by: U[[1, 4, 5, 7][i % 4]].name,
+            date: "2026-08-" + (10 + i),
+            loc: ["Lucknow", "Kanpur", "Agra", "Varanasi"][i % 4],
+            status: ["Collected", "Sealed", "In Lab", "Produced in Court"][
+              i % 4
+            ],
+            chain: [
+              {
+                t: "2026-08-" + (10 + i) + " 11:00",
+                x: "Collected & sealed",
+                w: U[[1, 4, 5, 7][i % 4]].name,
+              },
+            ],
+          }));
+        const A = [
+          ["Login", "—"],
+          ["Upload", "DOC-1001"],
+          ["View", "DOC-1004"],
+          ["Approve", "DOC-1006"],
+          ["Download", "DOC-1003"],
+          ["Access denied", "DOC-1008"],
+          ["Share", "DOC-1002"],
+          ["Edit", "DOC-1010"],
+          ["Reject", "DOC-1011"],
+          ["Archive", "DOC-1012"],
+        ].map((a, i) => ({
+          t: "2026-09-2" + (i % 8) + " 0" + (9 - (i % 3)) + ":1" + i + ":2" + i,
+          u: U[i % 5].name,
+          a: a[0],
+          doc: a[1],
+          case: "",
+          ip: "10.20.4." + (20 + i),
+          r: a[0] == "Access denied" ? "Denied" : "Success",
+        }));
+        return {
+          users: U,
+          cases: C,
+          docs: D,
+          ev: EV,
+          audit: A,
+          links: [],
+          notes: [
+            {
+              id: 1,
+              x: "Review required: Seizure Memo – 4.2 kg contraband",
+              r: 0,
+              t: "10 min ago",
+            },
+            {
+              id: 2,
+              x: "New document uploaded: FSL Report",
+              r: 0,
+              t: "1 hr ago",
+            },
+            {
+              id: 3,
+              x: "Access request for DOC-1006 from Kavita Rao",
+              r: 0,
+              t: "3 hr ago",
+            },
+            {
+              id: 4,
+              x: "Expiring document: Search Warrant u/s 93 CrPC (5 days)",
+              r: 1,
+              t: "Yesterday",
+            },
+            {
+              id: 5,
+              x: "Case update: PMLA Probe – new evidence linked",
+              r: 1,
+              t: "Yesterday",
+            },
+          ],
+          theme: "light",
+          role: "Officer",
+          user: null,
+          set: {
+            mfa: true,
+            timeout: true,
+            email: true,
+            push: false,
+            audit: true,
+            compact: false,
+          },
+        };
+      }
+      function save() {
+        localStorage.setItem("nv", JSON.stringify(S));
+      }
+      S = JSON.parse(localStorage.getItem("nv") || "null") || seed();
+      function toast(m, e) {
+        const d = document.createElement("div");
+        d.className = "t" + (e ? " e" : "");
+        d.textContent = m;
+        $("#ts").append(d);
+        setTimeout(() => d.remove(), 3200);
+      }
+      function modal(h) {
+        $("#mo").innerHTML =
+          `<div class="md" role="dialog" aria-modal="true"><button class="btn s x" style="position:absolute;right:10px;top:10px" onclick="closeM()" aria-label="Close">✕</button>${h}</div>`;
+        $("#mo").classList.add("on");
+      }
+      function closeM() {
+        $("#mo").classList.remove("on");
+      }
+      let CF;
+      function conf(m, f) {
+        CF = f;
+        modal(
+          `<h3>Confirm action</h3><p>${m}</p><button class="btn s" onclick="closeM()">Cancel</button> <button class="btn d" onclick="closeM();CF()">Confirm</button>`,
+        );
+      }
+      function log(a, doc, r, c) {
+        S.audit.unshift({
+          t: now() + ":00",
+          u: S.user ? S.user.name : "System",
+          a,
+          doc: doc || "—",
+          case: c || "",
+          ip: "10.20.4." + (20 + Math.floor(Math.random() * 60)),
+          r: r || "Success",
+        });
+        save();
+      }
+      function note(x) {
+        S.notes.unshift({ id: Date.now(), x, r: 0, t: "Just now" });
+        save();
+        bell();
+      }
+      function bell() {
+        const n = S.notes.filter((x) => !x.r).length;
+        $("#nc").textContent = n || "";
+      }
+      function login() {
+        const e = $("#lem").value.trim().toLowerCase(),
+          r = $("#lr").value;
+        if (!/^\S+@\S+\.\S+$/.test(e))
+          return toast("Enter a valid email address", 1);
+        S.role = r;
+        S.user =
+          S.users.find((u) => u.email == e && u.role == r) ||
+          S.users.find((u) => u.role == r);
+        log("Login");
+        enter();
+      }
+      function enter() {
+        $("#lg").style.display = "none";
+        $("#app").style.display = "flex";
+        document.documentElement.dataset.t = S.theme;
+        $("#rs").value = S.role;
+        nav();
+        bell();
+        go(V);
+      }
+      function logout() {
+        log("Logout");
+        S.user = null;
+        save();
+        $("#app").style.display = "none";
+        $("#lg").style.display = "flex";
+      }
+      function switchRole(r) {
+        S.role = r;
+        S.user = S.users.find((u) => u.role == r);
+        save();
+        toast("Switched to " + RN[r]);
+        nav();
+        go(V === "users" && !can("manage") ? "dash" : V);
+      }
+      function theme() {
+        S.theme = S.theme == "dark" ? "light" : "dark";
+        document.documentElement.dataset.t = S.theme;
+        save();
+        go(V);
+      }
+      const NAV = [
+        ["dash", "gauge", "Dashboard"],
+        ["docs", "file-shield", "Documents"],
+        ["cases", "briefcase", "Cases"],
+        ["ev", "vial", "Evidence"],
+        ["audit", "clipboard-list", "Audit Trail"],
+        ["analytics", "chart-pie", "Analytics"],
+        ["sec", "lock", "Security"],
+        ["users", "users-gear", "Access Control"],
+        ["notifs", "bell", "Notifications"],
+        ["set", "gear", "Settings"],
+      ];
+      function nav() {
+        $("#sb").innerHTML =
+          `<h1><i class="fa-solid fa-scale-balanced"></i> NayayavVidhi</h1><small>Secure Legal &amp; Investigation Document Management System</small>` +
+          NAV.map(
+            (n) =>
+              `<a class="${V == n[0] ? "on" : ""}" tabindex="0" onclick="go('${n[0]}')"><i class="fa-solid fa-${n[1]}"></i>${n[2]}</a>`,
+          ).join("") +
+          `<div style="margin:14px 8px;font-size:12px">${S.user.name}<br>${RN[S.role]}</div>`;
+      }
+      function go(v, a) {
+        V = v;
+        arg = a;
+        sb.classList.remove("on");
+        CH.forEach((c) => c.destroy());
+        CH = [];
+        const f = {
+          dash,
+          docs,
+          cases,
+          case: cs,
+          ev,
+          audit,
+          analytics,
+          sec,
+          users,
+          notifs,
+          set,
+          search,
+        };
+        $("#main").innerHTML = f[v]();
+        nav();
+        (window["post_" + v] || (() => {}))();
+      }
+      const pg = (t, s) => `<h2 style="margin:0 0 14px">${t}</h2>`,
+        tb = (h, r) =>
+          `<div class="tw"><table><thead><tr>${h}</tr></thead><tbody>${r || `<tr><td colspan="9" class="em">No records match. Adjust filters or add a new record.</td></tr>`}</tbody></table></div>`;
+      const cnt = (a, k) =>
+        a.reduce((m, x) => ((m[x[k]] = (m[x[k]] || 0) + 1), m), {});
+      function dash() {
+        const d = S.docs,
+          pr = d.filter((x) => x.status == "Under Review").length;
+        return (
+          pg("Dashboard") +
+          `<div class="gr"><div class="cd kp"><span>Total Documents</span><b>${d.length}</b></div><div class="cd kp"><span>Pending Reviews</span><b>${pr}</b></div><div class="cd kp"><span>Active Investigations</span><b>${S.cases.filter((c) => c.status != "Closed").length}</b></div><div class="cd kp"><span>Expiring Documents</span><b>${S.links.length + 3}</b></div><div class="cd kp"><span>Storage Used</span><b>${d.reduce((s, x) => s + x.size, 0).toFixed(1)} MB</b></div></div>
+<div class="cd"><h3>Quick actions</h3>${can("upload") ? '<button class="btn" onclick="upl()"><i class="fa-solid fa-upload"></i> Upload document</button> ' : ""}<button class="btn s" onclick="go('docs')">Review queue</button> <button class="btn s" onclick="evAdd()">Add evidence</button> <button class="btn s" onclick="go('audit')">Audit trail</button></div>
+<div class="g2"><div class="cd"><h3>Upload trend</h3><canvas id="c1"></canvas></div><div class="cd"><h3>Investigation status</h3><canvas id="c2"></canvas></div></div>
+<div class="cd"><h3>Recent activity</h3>${S.audit
+            .slice(0, 6)
+            .map(
+              (a) =>
+                `<div class="row"><span><b>${a.u}</b> — ${a.a} ${a.doc}</span><small>${a.t}</small></div>`,
+            )
+            .join("")}</div>`
+        );
+      }
+      const mk = (id, t, l, d, o) => {
+        const c = new Chart($("#" + id), {
+          type: t,
+          data: {
+            labels: l,
+            datasets: [
+              {
+                data: d,
+                label: "Count",
+                backgroundColor: [
+                  "#1e3a8a",
+                  "#0d9488",
+                  "#d97706",
+                  "#dc2626",
+                  "#6366f1",
+                  "#64748b",
+                ],
+                borderColor: "#1e3a8a",
+                tension: 0.3,
+              },
+            ],
+          },
+          options: {
+            plugins: { legend: { display: t != "bar" && t != "line" } },
+            ...o,
+          },
+        });
+        CH.push(c);
+      };
+      const mo = () => {
+        const m = {};
+        S.docs.forEach((d) => {
+          const k = d.upd.slice(0, 7);
+          m[k] = (m[k] || 0) + 1;
+        });
+        return ["2026-05", "2026-06", "2026-07", "2026-08", "2026-09"].map(
+          (k) => [
+            k,
+            (m[k] || 0) +
+              [3, 5, 4, 6, 0][
+                ["2026-05", "2026-06", "2026-07", "2026-08", "2026-09"].indexOf(
+                  k,
+                )
+              ],
+          ],
+        );
+      };
+      function post_dash() {
+        mk(
+          "c1",
+          "line",
+          mo().map((x) => x[0]),
+          mo().map((x) => x[1]),
+        );
+        const s = cnt(S.cases, "status");
+        mk("c2", "doughnut", Object.keys(s), Object.values(s));
+      }
+      function analytics() {
+        return (
+          pg("Analytics") +
+          `<div class="g2">${["Documents by type", "Documents by classification", "Monthly uploads", "Case status", "Storage usage (MB by type)", "Audit activity"].map((t, i) => `<div class="cd"><h3>${t}</h3><canvas id="a${i}"></canvas></div>`).join("")}</div>`
+        );
+      }
+      function post_analytics() {
+        const a = (id, t, o) => mk(id, t, Object.keys(o), Object.values(o)),
+          st = {};
+        S.docs.forEach(
+          (d) => (st[d.type] = +((st[d.type] || 0) + d.size).toFixed(1)),
+        );
+        a("a0", "bar", cnt(S.docs, "type"));
+        a("a1", "pie", cnt(S.docs, "cls"));
+        mk(
+          "a2",
+          "line",
+          mo().map((x) => x[0]),
+          mo().map((x) => x[1]),
+        );
+        a("a3", "doughnut", cnt(S.cases, "status"));
+        a("a4", "bar", st);
+        a("a5", "bar", cnt(S.audit, "a"));
+      }
+      function docs() {
+        let r = S.docs.filter(
+          (d) =>
+            (!T.ty || d.type == T.ty) &&
+            (!T.st || d.status == T.st) &&
+            (d.name + d.id + d.case + d.owner)
+              .toLowerCase()
+              .includes(T.q.toLowerCase()),
+        );
+        r.sort((a, b) => (a[T.k] > b[T.k] ? 1 : -1) * T.d);
+        const n = Math.max(1, Math.ceil(r.length / 8));
+        T.p = Math.min(T.p, n - 1);
+        const R = r.slice(T.p * 8, T.p * 8 + 8);
+        const th =
+          [
+            ["id", "Document ID"],
+            ["name", "Name"],
+            ["case", "Case"],
+            ["type", "Type"],
+            ["cls", "Classification"],
+            ["owner", "Owner"],
+            ["status", "Status"],
+            ["upd", "Updated"],
+          ]
+            .map(
+              (h) =>
+                `<th onclick="T.k='${h[0]}';T.d=-T.d;go('docs')">${h[1]} ${T.k == h[0] ? (T.d > 0 ? "▲" : "▼") : ""}</th>`,
+            )
+            .join("") + "<th>Actions</th>";
+        return (
+          pg("Documents") +
+          `<div class="tb"><input placeholder="Search documents" value="${T.q}" oninput="T.q=this.value;T.p=0;go('docs');this.focus()" style="width:220px" id="dq"><select onchange="T.ty=this.value;T.p=0;go('docs')"><option value="">All types</option>${TY.map((t) => `<option ${T.ty == t ? "selected" : ""}>${t}</option>`).join("")}</select><select onchange="T.st=this.value;T.p=0;go('docs')"><option value="">All statuses</option>${Object.keys(
+            ST,
+          )
+            .map((t) => `<option ${T.st == t ? "selected" : ""}>${t}</option>`)
+            .join(
+              "",
+            )}</select><span class="sp"></span>${can("upload") ? '<button class="btn" onclick="upl()"><i class="fa-solid fa-upload"></i> Upload</button>' : ""}</div><div class="cd">` +
+          tb(
+            th,
+            R.map(
+              (d) =>
+                `<tr><td>${d.id}</td><td>${d.name}</td><td>${d.case}</td><td>${d.type}</td><td>${bd(d.cls)}</td><td>${d.owner}</td><td>${bd(d.status)}</td><td>${d.upd}</td><td><button class="btn x" onclick="view('${d.id}')" title="View / Preview">View</button> <button class="btn x s" onclick="dl('${d.id}')" title="Download"><i class="fa-solid fa-download"></i></button> <button class="btn x s" onclick="edit('${d.id}')" title="Edit metadata"><i class="fa-solid fa-pen"></i></button> <button class="btn x s" onclick="share('${d.id}')" title="Share"><i class="fa-solid fa-share-nodes"></i></button> <button class="btn x s" onclick="vers('${d.id}')" title="Versions"><i class="fa-solid fa-clock-rotate-left"></i></button> <button class="btn x s" onclick="arch('${d.id}')" title="Archive"><i class="fa-solid fa-box-archive"></i></button> <button class="btn x s" onclick="del('${d.id}')" title="Delete"><i class="fa-solid fa-trash"></i></button></td></tr>`,
+            ).join(""),
+          ) +
+          `<div class="tb" style="margin:10px 0 0"><button class="btn s x" onclick="T.p--;go('docs')" ${T.p < 1 ? "disabled" : ""}>Prev</button> Page ${T.p + 1} of ${n} (${r.length} records) <button class="btn s x" onclick="T.p++;go('docs')" ${T.p >= n - 1 ? "disabled" : ""}>Next</button></div></div>`
+        );
+      }
+      function post_docs() {
+        const q = $("#dq");
+        if (q && document.activeElement != q && T.q) {
+        }
+      }
+      const gd = (id) => S.docs.find((d) => d.id == id),
+        guard = (p, f) =>
+          can(p)
+            ? f()
+            : (log("Access denied", "—", "Denied"),
+              modal(
+                `<h3><i class="fa-solid fa-ban" style="color:#dc2626"></i> Access denied</h3><p>Your role (${RN[S.role]}) does not have the “${p}” permission. This attempt has been recorded in the audit trail.</p>`,
+              ),
+              toast("Permission denied", 1));
+      function upl() {
+        guard("upload", () =>
+          modal(`<h3>Upload document</h3><div class="dz" id="dz" onclick="uf.click()" ondragover="event.preventDefault();this.classList.add('o')" ondragleave="this.classList.remove('o')" ondrop="event.preventDefault();pick(event.dataTransfer.files)"><i class="fa-solid fa-cloud-arrow-up fa-2x"></i><p id="fn">Drag &amp; drop a file here or click to browse</p></div><input type="file" id="uf" hidden onchange="pick(this.files)">
+<div class="g2"><div><label>Document name</label><input id="un"></div><div><label>Type</label><select id="ut">${TY.map((t) => `<option>${t}</option>`).join("")}</select></div><div><label>Case ID</label><select id="uc">${S.cases.map((c) => `<option>${c.id}</option>`).join("")}</select></div><div><label>Investigation ID</label><input id="ui" value="INV-2026-${Math.floor(100 + Math.random() * 900)}"></div><div><label>Confidentiality</label><select id="ul">${Object.keys(
+            CL,
+          )
+            .map(
+              (t) =>
+                `<option ${t == "Confidential" ? "selected" : ""}>${t}</option>`,
+            )
+            .join(
+              "",
+            )}</select></div><div><label>Tags</label><input id="ug" placeholder="comma separated"></div></div><label>Description</label><textarea id="ud" rows="2"></textarea><div id="pb" style="height:6px;background:var(--bd);border-radius:4px;margin:10px 0;display:none"><div style="height:6px;width:0;background:var(--ac);border-radius:4px;transition:width 1.2s" id="pf"></div></div><button class="btn" onclick="doUp()">Upload &amp; save as draft</button>`),
+        );
+      }
+      function pick(f) {
+        if (f[0]) {
+          $("#fn").textContent = f[0].name;
+          $("#un").value = $("#un").value || f[0].name.replace(/\.[^.]+$/, "");
+          window.fsz = f[0].size / 1048576;
+        }
+      }
+      function doUp() {
+        const n = $("#un").value.trim();
+        if (!n) return toast("Enter a document name or choose a file", 1);
+        $("#pb").style.display = "block";
+        setTimeout(() => ($("#pf").style.width = "100%"), 30);
+        setTimeout(() => {
+          addDoc({
+            name: n,
+            type: $("#ut").value,
+            case: $("#uc").value,
+            cls: $("#ul").value,
+            tags: $("#ug").value,
+            desc: $("#ud").value,
+            size: +(window.fsz || 1.2).toFixed(1),
+          });
+          closeM();
+          go(V);
+        }, 1300);
+      }
+      function addDoc(o) {
+        const d = {
+          id: "DOC-" + (1001 + S.docs.length + Math.floor(Math.random() * 50)),
+          owner: S.user.name,
+          status: "Draft",
+          upd: now().slice(0, 10),
+          ver: [
+            {
+              v: 1,
+              by: S.user.name,
+              date: now().slice(0, 10),
+              ch: "Initial upload",
+            },
+          ],
+          ...o,
+        };
+        S.docs.unshift(d);
+        const c = S.cases.find((x) => x.id == d.case);
+        c.upd = d.upd;
+        c.tl.push({ t: now(), x: `Document ${d.id} uploaded: ${d.name}` });
+        log("Upload", d.id, "Success", d.case);
+        note("New document uploaded: " + d.name);
+        toast("Document uploaded as draft: " + d.id);
+        return d;
+      }
+      function wfSet(id, s, c) {
+        const d = gd(id);
+        d.status = s;
+        d.upd = now().slice(0, 10);
+        d.ver.push({
+          v: d.ver.length + 1,
+          by: S.user.name,
+          date: d.upd,
+          ch: "Status → " + s + (c ? " (" + c + ")" : ""),
+        });
+        const cs = S.cases.find((x) => x.id == d.case);
+        cs.tl.push({ t: now(), x: `${d.id} ${s}` });
+        log(
+          s == "Under Review"
+            ? "Submit"
+            : s == "Approved"
+              ? "Approve"
+              : s == "Rejected"
+                ? "Reject"
+                : "Archive",
+          id,
+          "Success",
+          d.case,
+        );
+        if (s == "Under Review") note("Review required: " + d.name);
+        save();
+      }
+      function canView(d) {
+        return (
+          d.cls != "Restricted" ||
+          ["Admin", "Legal"].includes(S.role) ||
+          d.owner == S.user.name
+        );
+      }
+      function view(id) {
+        const d = gd(id);
+        if (!canView(d)) {
+          log("Access denied", id, "Denied", d.case);
+          return modal(
+            `<h3><i class="fa-solid fa-ban" style="color:#dc2626"></i> Access denied</h3><p>${d.id} is classified <b>Restricted</b>. ${RN[S.role]} accounts cannot open Restricted documents. This attempt has been logged.</p><button class="btn" onclick="toast('Access request sent to Admin');note('Access request for ${d.id} from ${S.user.name}');closeM()">Request access</button>`,
+          );
+        }
+        log("View", id, "Success", d.case);
+        const i = WF.indexOf(d.status == "Rejected" ? "Draft" : d.status),
+          cs = S.cases.find((c) => c.id == d.case);
+        modal(`<h3>${d.name} ${bd(d.cls)} ${bd(d.status)}</h3><div class="ban" style="border-radius:6px"><i class="fa-solid fa-triangle-exclamation"></i> Access warning: this ${d.cls} document is monitored. Every view, print and download is logged.</div><div class="stp">${WF.map((w, k) => `<span class="${k <= i ? "on" : ""}">${w}</span>`).join("")}${d.status == "Rejected" ? '<span style="background:#dc2626;color:#fff">Rejected</span>' : ""}</div>
+<div class="wm" data-w="${S.user.name} · ${now()} · ${d.id}"><b>${cs.title}</b><p>Type: ${d.type}. ${d.desc}</p><p>In the matter of ${cs.id}, before the Investigating Officer, State of Uttar Pradesh. The undersigned states that the particulars recorded herein are true to the best of knowledge, subject to verification under the applicable provisions of BNSS.</p></div>
+<div class="g2" style="margin-top:10px"><div><b>Metadata</b><br>ID: ${d.id}<br>Case: ${d.case}<br>Owner: ${d.owner}<br>Size: ${d.size} MB<br>Tags: ${d.tags || "—"}<br>Updated: ${d.upd}</div><div><b>Activity</b>${S.audit
+          .filter((a) => a.doc == id)
+          .slice(0, 4)
+          .map((a) => `<br>${a.t.slice(5, 16)} ${a.u}: ${a.a}`)
+          .join("")}</div></div><p>
+<button class="btn s" onclick="dl('${id}')">Download</button> <button class="btn s" onclick="log('Print','${id}');toast('Print logged (watermark applied)')">Print</button> ${d.status == "Draft" || d.status == "Rejected" ? `<button class="btn" onclick="guard('edit',()=>{wfSet('${id}','Under Review');closeM();go(V);toast('Submitted for review')})">Submit for review</button>` : ""} ${d.status == "Under Review" ? `<button class="btn g" onclick="rev('${id}',1)">Approve</button> <button class="btn d" onclick="rev('${id}',0)">Reject</button>` : ""}</p>`);
+      }
+      function rev(id, ok) {
+        guard("approve", () => {
+          wfSet(
+            id,
+            ok ? "Approved" : "Rejected",
+            ok ? "" : "Needs corrections",
+          );
+          closeM();
+          go(V);
+          toast(ok ? "Document approved" : "Document rejected", !ok);
+        });
+      }
+      function dl(id) {
+        guard("download", () => {
+          const d = gd(id);
+          if (!canView(d)) return view(id);
+          log("Download", id, "Success", d.case);
+          const a = document.createElement("a");
+          a.href = URL.createObjectURL(
+            new Blob([
+              `NayayavVidhi demo copy\n${d.id} ${d.name}\nWatermark: ${S.user.name} ${now()}`,
+            ]),
+          );
+          a.download = d.id + ".txt";
+          a.click();
+          toast("Download started (demo file)");
+        });
+      }
+      function edit(id) {
+        guard("edit", () => {
+          const d = gd(id);
+          modal(
+            `<h3>Edit metadata – ${id}</h3><label>Name</label><input id="en" value="${d.name}"><label>Classification</label><select id="ec">${Object.keys(
+              CL,
+            )
+              .map(
+                (t) => `<option ${t == d.cls ? "selected" : ""}>${t}</option>`,
+              )
+              .join(
+                "",
+              )}</select><label>Tags</label><input id="et" value="${d.tags}"><label>Description</label><textarea id="ed">${d.desc}</textarea><p><button class="btn" onclick="const d=gd('${id}');d.name=en.value;d.cls=ec.value;d.tags=et.value;d.desc=ed.value;log('Edit','${id}','Success',d.case);save();closeM();go(V);toast('Metadata updated')">Save changes</button></p>`,
+          );
+        });
+      }
+      function share(id) {
+        guard("share", () =>
+          modal(
+            `<h3>Secure share – ${id}</h3><p style="color:var(--mu)">Simulation only: links are not real.</p><label>Recipient</label><input id="sr" placeholder="name@agency.gov.in"><label>Link expires in</label><select id="sx"><option>1 hour</option><option>24 hours</option><option>7 days</option></select><p><button class="btn" onclick="if(!/^\\S+@\\S+$/.test(sr.value))return toast('Enter a valid recipient email',1);S.links.push({doc:'${id}',to:sr.value,exp:sx.value,url:'https://NayayavVidhi.demo/s/'+Math.random().toString(36).slice(2,10)});log('Share','${id}');save();closeM();toast('Expiring link created');go(V)">Create link</button></p>`,
+          ),
+        );
+      }
+      function vers(id) {
+        const d = gd(id);
+        modal(
+          `<h3>Version history – ${id}</h3>` +
+            [...d.ver]
+              .reverse()
+              .map(
+                (v) =>
+                  `<div class="row"><span><b>Version ${v.v}</b> · ${v.by} · ${v.date}<br><small>${v.ch}</small></span>${v.v < d.ver.length ? `<button class="btn x s" onclick="guard('edit',()=>{const d=gd('${id}');d.ver.push({v:d.ver.length+1,by:S.user.name,date:now().slice(0,10),ch:'Restored version ${v.v}'});log('Restore','${id}');save();closeM();toast('Version ${v.v} restored')})">Restore</button>` : '<span class="bd" style="--c:#16a34a">Current</span>'}</div>`,
+              )
+              .join(""),
+        );
+      }
+      function arch(id) {
+        guard("edit", () =>
+          conf("Archive " + id + "?", () => {
+            wfSet(id, "Archived");
+            go(V);
+            toast("Document archived");
+          }),
+        );
+      }
+      function del(id) {
+        guard("delete", () =>
+          conf(
+            "Permanently delete " +
+              id +
+              "? This is recorded in the audit trail.",
+            () => {
+              S.docs = S.docs.filter((d) => d.id != id);
+              log("Delete", id);
+              save();
+              go(V);
+              toast("Document deleted");
+            },
+          ),
+        );
+      }
+      function cases() {
+        return (
+          pg("Cases") +
+          `<div class="cd">` +
+          tb(
+            "<th>Case ID</th><th>Title</th><th>Priority</th><th>Officer</th><th>Status</th><th>Updated</th><th>Docs</th>",
+            S.cases
+              .map(
+                (c) =>
+                  `<tr class="ul" onclick="go('case','${c.id}')"><td>${c.id}</td><td>${c.title}</td><td>${bd(c.pri == "Critical" || c.pri == "High" ? "Restricted" : c.pri == "Medium" ? "Confidential" : "Public").replace(/>[^<]*</, ">" + c.pri + "<")}</td><td>${c.off}</td><td>${c.status}</td><td>${c.upd}</td><td>${S.docs.filter((d) => d.case == c.id).length}</td></tr>`,
+              )
+              .join(""),
+          ) +
+          "</div>"
+        );
+      }
+      function cs() {
+        const c = S.cases.find((x) => x.id == arg),
+          d = S.docs.filter((x) => x.case == c.id),
+          e = S.ev.filter((x) => x.case == c.id);
+        return `<button class="btn s" onclick="go('cases')">← Cases</button><h2>${c.id} · ${c.title}</h2><div class="g2"><div class="cd"><h3>Overview</h3>Priority: <b>${c.pri}</b><br>Status: <b>${c.status}</b><br>Assigned officer: <b>${c.off}</b><br>Last updated: ${c.upd}</div><div class="cd"><h3>Notes</h3>${c.notes.map((n) => `<div class="row">${n}</div>`).join("")}<div class="tb" style="margin-top:8px"><input id="cn" placeholder="Add a note" style="width:200px"><button class="btn x" onclick="if(!cn.value)return toast('Write a note first',1);S.cases.find(x=>x.id=='${c.id}').notes.push(cn.value);log('Note','—','Success','${c.id}');save();go('case','${c.id}')">Add</button></div></div></div>
+<div class="cd"><h3>Documents (${d.length})</h3>${d.map((x) => `<div class="row ul" onclick="view('${x.id}')"><span>${x.id} · ${x.name}</span>${bd(x.status)}</div>`).join("") || '<div class="em">No documents linked yet.</div>'}</div>
+<div class="cd"><h3>Evidence (${e.length}) <button class="btn x" onclick="evAdd('${c.id}')">Add evidence</button></h3>${e.map((x) => `<div class="row ul" onclick="chain('${x.id}')"><span>${x.id} · ${x.desc}</span><span>${x.status}</span></div>`).join("") || '<div class="em">No evidence recorded.</div>'}</div>
+<div class="g2"><div class="cd"><h3>Timeline</h3><div class="tl">${[...c.tl]
+          .reverse()
+          .map((t) => `<div>${t.x}<small>${t.t}</small></div>`)
+          .join("")}</div></div><div class="cd"><h3>Activity log</h3>${
+          S.audit
+            .filter((a) => a.case == c.id)
+            .slice(0, 8)
+            .map(
+              (a) =>
+                `<div class="row"><span>${a.u}: ${a.a} ${a.doc}</span><small>${a.t.slice(5, 16)}</small></div>`,
+            )
+            .join("") || '<div class="em">No logged activity.</div>'
+        }</div></div>`;
+      }
+      function ev() {
+        return (
+          pg("Evidence") +
+          `<div class="tb"><button class="btn" onclick="evAdd()"><i class="fa-solid fa-plus"></i> Add evidence</button></div><div class="cd">` +
+          tb(
+            "<th>ID</th><th>Type</th><th>Description</th><th>Case</th><th>Collected by</th><th>Date</th><th>Location</th><th>Custody</th>",
+            S.ev
+              .map(
+                (x) =>
+                  `<tr class="ul" onclick="chain('${x.id}')"><td>${x.id}</td><td>${x.type}</td><td>${x.desc}</td><td>${x.case}</td><td>${x.by}</td><td>${x.date}</td><td>${x.loc}</td><td>${bd("Under Review").replace(/>[^<]*</, ">" + x.status + "<")}</td></tr>`,
+              )
+              .join(""),
+          ) +
+          "</div>"
+        );
+      }
+      function evAdd(c) {
+        guard("upload", () =>
+          modal(
+            `<h3>Add evidence</h3><div class="g2"><div><label>Type</label><select id="vt">${V2.map((t) => `<option>${t}</option>`).join("")}</select></div><div><label>Case ID</label><select id="vc">${S.cases.map((x) => `<option ${x.id == c ? "selected" : ""}>${x.id}</option>`).join("")}</select></div><div><label>Collection date</label><input type="date" id="vd" value="${now().slice(0, 10)}"></div><div><label>Location</label><input id="vl" placeholder="e.g. Gomti Nagar, Lucknow"></div></div><label>Description</label><input id="vs"><p><button class="btn" onclick="addEv({type:vt.value,case:vc.value,date:vd.value,loc:vl.value,desc:vs.value});closeM();go(V)">Save evidence</button></p>`,
+          ),
+        );
+      }
+      function addEv(o) {
+        if (!o.desc || !o.loc)
+          return toast("Description and location are required", 1);
+        const e = {
+          id: "EVD-" + (501 + S.ev.length),
+          by: S.user.name,
+          status: "Collected",
+          chain: [{ t: now(), x: "Collected & sealed", w: S.user.name }],
+          ...o,
+        };
+        S.ev.unshift(e);
+        S.cases
+          .find((c) => c.id == e.case)
+          .tl.push({ t: now(), x: `Evidence ${e.id} linked: ${e.desc}` });
+        log("Evidence added", e.id, "Success", e.case);
+        note("Case update: evidence linked to " + e.case);
+        toast("Evidence added: " + e.id);
+      }
+      function chain(id) {
+        const e = S.ev.find((x) => x.id == id),
+          N = ["Collected", "Sealed", "In Lab", "Produced in Court"];
+        modal(
+          `<h3>${e.id} · ${e.desc}</h3><p>Status: ${e.status}</p><div class="tl">${e.chain.map((c) => `<div>${c.x} — ${c.w}<small>${c.t}</small></div>`).join("")}</div>${e.status != "Produced in Court" ? `<button class="btn" onclick="guard('edit',()=>{const e=S.ev.find(x=>x.id=='${id}'),n=['Collected','Sealed','In Lab','Produced in Court'][['Collected','Sealed','In Lab','Produced in Court'].indexOf(e.status)+1];e.status=n;e.chain.push({t:now(),x:'Custody transferred → '+n,w:S.user.name});S.cases.find(c=>c.id==e.case).tl.push({t:now(),x:e.id+' '+n});log('Custody transfer',e.id,'Success',e.case);save();chain('${id}');toast('Custody updated')})">Transfer to next stage</button>` : ""}`,
+        );
+      }
+      function audit() {
+        if (!can("audit") && !can("manage"))
+          return `<div class="em cd"><i class="fa-solid fa-ban fa-2x"></i><h3>Access denied</h3>The audit trail is available to Admin and Auditor roles.</div>`;
+        const r = S.audit.filter(
+          (a) =>
+            (!AU.u || a.u == AU.u) &&
+            (!AU.a || a.a == AU.a) &&
+            (!AU.c || a.case == AU.c),
+        );
+        return (
+          pg("Audit Trail") +
+          `<div class="tb"><select onchange="AU.u=this.value;go('audit')"><option value="">All users</option>${[...new Set(S.audit.map((a) => a.u))].map((u) => `<option ${AU.u == u ? "selected" : ""}>${u}</option>`).join("")}</select><select onchange="AU.a=this.value;go('audit')"><option value="">All actions</option>${[...new Set(S.audit.map((a) => a.a))].map((u) => `<option ${AU.a == u ? "selected" : ""}>${u}</option>`).join("")}</select><select onchange="AU.c=this.value;go('audit')"><option value="">All cases</option>${S.cases.map((c) => `<option ${AU.c == c.id ? "selected" : ""}>${c.id}</option>`).join("")}</select><small style="color:var(--mu)">Append-only view: entries cannot be edited or deleted here.</small></div><div class="cd">` +
+          tb(
+            "<th>Timestamp</th><th>User</th><th>Action</th><th>Document</th><th>IP</th><th>Result</th>",
+            r
+              .slice(0, 40)
+              .map(
+                (a) =>
+                  `<tr><td>${a.t}</td><td>${a.u}</td><td>${a.a}</td><td>${a.doc}</td><td>${a.ip}</td><td>${bd(a.r == "Denied" ? "Rejected" : "Approved").replace(/>[^<]*</, ">" + a.r + "<")}</td></tr>`,
+              )
+              .join(""),
+          ) +
+          "</div>"
+        );
+      }
+      function users() {
+        if (!can("manage"))
+          return `<div class="em cd"><i class="fa-solid fa-ban fa-2x"></i><h3>Access denied</h3>Only Admin can manage users and permissions. Switch role to Admin to continue.</div>`;
+        const ps = P.Admin.filter((p) => p != "manage");
+        return (
+          pg("Access Control") +
+          `<div class="cd">` +
+          tb(
+            "<th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Last login</th>",
+            S.users
+              .map(
+                (u) =>
+                  `<tr><td>${u.name}</td><td>${u.email}</td><td><select style="width:auto" onchange="S.users.find(x=>x.id=='${u.id}').role=this.value;log('Role change','${u.id}');save();toast('Role updated')">${Object.keys(
+                    RN,
+                  )
+                    .map(
+                      (r) =>
+                        `<option value="${r}" ${u.role == r ? "selected" : ""}>${RN[r]}</option>`,
+                    )
+                    .join(
+                      "",
+                    )}</select></td><td><button class="tg ${u.status == "Active" ? "on" : ""}" aria-label="Toggle status" onclick="const x=S.users.find(x=>x.id=='${u.id}');x.status=x.status=='Active'?'Suspended':'Active';log('Account '+x.status.toLowerCase(),x.id);save();go('users')"></button> ${u.status}</td><td>${u.last}</td></tr>`,
+              )
+              .join(""),
+          ) +
+          `</div><div class="cd"><h3>Role permissions</h3>` +
+          tb(
+            "<th>Role</th>" + ps.map((p) => `<th>${p}</th>`).join(""),
+            Object.keys(P)
+              .map(
+                (r) =>
+                  `<tr><td>${RN[r]}</td>${ps.map((p) => `<td><button class="tg ${P[r].includes(p) ? "on" : ""}" aria-label="${r} ${p}" onclick="const i=P['${r}'].indexOf('${p}');i<0?P['${r}'].push('${p}'):P['${r}'].splice(i,1);log('Permission change','${r}');go('users')"></button></td>`).join("")}</tr>`,
+              )
+              .join(""),
+          ) +
+          `</div>`
+        );
+      }
+      function sec() {
+        return (
+          pg("Document Security") +
+          `<div class="g2"><div class="cd"><h3>Session status</h3>Signed in as <b>${S.user.name}</b> (${RN[S.role]})<br>Session started: ${now()}<br>Auto-timeout: ${S.set.timeout ? "15 min" : "Off"}<br>Two-step verification: ${S.set.mfa ? "Enabled (simulated)" : "Off"}</div><div class="cd"><h3>Access denied demo</h3><p>Try opening a Restricted document as your current role.</p><button class="btn" onclick="view('${S.docs.find((d) => d.cls == "Restricted" && d.owner != S.user.name).id}')">Open restricted document</button></div></div><div class="cd"><h3>Classification access</h3>` +
+          tb(
+            "<th>Level</th><th>Admin</th><th>Officer</th><th>Legal</th><th>Auditor</th>",
+            Object.keys(CL)
+              .map(
+                (l) =>
+                  `<tr><td>${bd(l)}</td>${["Admin", "Officer", "Legal", "Auditor"].map((r) => `<td>${l == "Restricted" && !["Admin", "Legal"].includes(r) ? "Owner only" : "Allowed"}</td>`).join("")}</tr>`,
+              )
+              .join(""),
+          ) +
+          `</div><div class="cd"><h3>Login activity</h3>${S.audit
+            .filter((a) => /Login|Logout/.test(a.a))
+            .slice(0, 5)
+            .map(
+              (a) =>
+                `<div class="row"><span>${a.u} · ${a.a} · ${a.ip}</span><small>${a.t}</small></div>`,
+            )
+            .join(
+              "",
+            )}</div><div class="cd"><h3>Active share links (simulated)</h3>${S.links.map((l, i) => `<div class="row"><span>${l.doc} → ${l.to}<br><small>${l.url} · expires in ${l.exp}</small></span><button class="btn x d" onclick="S.links.splice(${i},1);log('Revoke link','${l.doc}');save();go('sec');toast('Link revoked')">Revoke</button></div>`).join("") || '<div class="em">No active links. Share a document to create one.</div>'}</div>`
+        );
+      }
+      function notifs() {
+        return (
+          pg("Notifications") +
+          `<div class="tb"><button class="btn s" onclick="S.notes.forEach(n=>n.r=1);save();bell();go('notifs');toast('All marked as read')">Mark all as read</button></div><div class="cd">${S.notes.map((n) => `<div class="row ${n.r ? "" : "un"}" style="padding:8px"><span>${n.x}<br><small>${n.t}</small></span>${n.r ? "" : `<button class="btn x s" onclick="S.notes.find(x=>x.id==${n.id}).r=1;save();bell();go('notifs')">Mark read</button>`}</div>`).join("") || '<div class="em">You are all caught up.</div>'}</div>`
+        );
+      }
+      function set() {
+        const t = (k, l) =>
+          `<div class="row"><span>${l}</span><button class="tg ${S.set[k] ? "on" : ""}" aria-label="${l}" onclick="S.set['${k}']=!S.set['${k}'];save();toast('${l}: '+(S.set['${k}']?'on':'off'));go('set')"></button></div>`;
+        return (
+          pg("Settings") +
+          `<div class="g2"><div class="cd"><h3>Profile</h3><label>Name</label><input id="pn" value="${S.user.name}"><label>Email</label><input value="${S.user.email}" disabled><p><button class="btn" onclick="S.user.name=pn.value;S.users.find(u=>u.id==S.user.id).name=pn.value;save();nav();toast('Profile saved')">Save profile</button></p></div><div class="cd"><h3>Security</h3>${t("mfa", "Two-step verification (simulated)")}${t("timeout", "Auto sign-out after 15 minutes")}</div><div class="cd"><h3>Notifications</h3>${t("email", "Email alerts")}${t("push", "Push alerts")}</div><div class="cd"><h3>Appearance</h3><div class="row"><span>Dark mode</span><button class="tg ${S.theme == "dark" ? "on" : ""}" aria-label="Dark mode" onclick="theme()"></button></div>${t("compact", "Compact tables")}</div><div class="cd"><h3>System</h3>${t("audit", "Record all views in audit trail")}<p><button class="btn d" onclick="conf('Reset all demo data?',()=>{localStorage.removeItem('nv');location.reload()})">Reset demo data</button></p></div></div>`
+        );
+      }
+      function search() {
+        const q = $("#gs").value.toLowerCase(),
+          m = (a, f) => a.filter((x) => f(x).toLowerCase().includes(q)),
+          D = m(S.docs, (x) => x.id + x.name + x.case),
+          C = m(S.cases, (x) => x.id + x.title),
+          Ev = m(S.ev, (x) => x.id + x.desc),
+          U = m(S.users, (x) => x.name + x.email),
+          sc = (t, a, f) =>
+            `<div class="cd"><h3>${t} (${a.length})</h3>${a.map(f).join("") || '<div class="em">No matches.</div>'}</div>`;
+        return (
+          pg("Search results") +
+          sc(
+            "Documents",
+            D,
+            (x) =>
+              `<div class="row ul" onclick="view('${x.id}')">${x.id} · ${x.name}</div>`,
+          ) +
+          sc(
+            "Cases",
+            C,
+            (x) =>
+              `<div class="row ul" onclick="go('case','${x.id}')">${x.id} · ${x.title}</div>`,
+          ) +
+          sc(
+            "Evidence",
+            Ev,
+            (x) =>
+              `<div class="row ul" onclick="chain('${x.id}')">${x.id} · ${x.desc}</div>`,
+          ) +
+          sc(
+            "Users",
+            U,
+            (x) => `<div class="row">${x.name} · ${RN[x.role]}</div>`,
+          )
+        );
+      }
+      const sl = (ms) => new Promise((r) => setTimeout(r, ms));
+      async function demo() {
+        const st = (m) => {
+          toast("Demo: " + m);
+        };
+        st("Officer signs in");
+        switchRole("Officer");
+        go("dash");
+        await sl(1600);
+        st("Uploading document");
+        const d = addDoc({
+          name: "Digital Forensics Report – Laptop",
+          type: "Forensic Report",
+          case: "CASE-26-1004",
+          cls: "Confidential",
+          tags: "demo",
+          desc: "Imaging of seized laptop.",
+          size: 3.4,
+        });
+        go("docs");
+        await sl(1800);
+        st("Submitted for review");
+        wfSet(d.id, "Under Review");
+        go("docs");
+        await sl(1800);
+        st("Legal Officer reviews");
+        switchRole("Legal");
+        go("docs");
+        await sl(1500);
+        view(d.id);
+        await sl(1800);
+        rev(d.id, 1);
+        await sl(1600);
+        st("Officer adds linked evidence");
+        switchRole("Officer");
+        addEv({
+          type: "Digital",
+          case: "CASE-26-1004",
+          date: now().slice(0, 10),
+          loc: "Lucknow",
+          desc: "Disk image hash record",
+        });
+        go("case", "CASE-26-1004");
+        await sl(2200);
+        switchRole("Admin");
+        go("audit");
+        await sl(2000);
+        go("analytics");
+        st("Analytics updated. Demo complete.");
+      }
+      if (S.user) {
+        enter();
+      } else $("#lg").style.display = "flex";
+    </script>
+  </body>
+</html>
